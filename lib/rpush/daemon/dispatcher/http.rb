@@ -5,7 +5,7 @@ module Rpush
         def initialize(app, delivery_class, _options = {})
           @app = app
           @delivery_class = delivery_class
-          proxy = ENV["https_proxy"]
+          proxy = ENV["http_proxy"]
           if proxy.blank?
             @http = Net::HTTP::Persistent.new('rpush')
           else
