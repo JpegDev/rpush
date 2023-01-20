@@ -6,7 +6,11 @@ module Rpush
           @app = app
           @delivery_class = delivery_class
           proxy = ENV["https_proxy"]
-          @http = Net::HTTP::Persistent.new('rpush', proxy)
+          if proxy.blank?
+            @http = Net::HTTP::Persistent.new('rpush')
+          else
+            @http = Net::HTTP::Persistent.new('rpush', proxy)
+          end
         end
 
         def dispatch(payload)
